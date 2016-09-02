@@ -14,7 +14,7 @@ public class FileTest2 {
 	public static void delFolder(String folderPath) {
 		try {
 			delAllFile(folderPath); // 删除完里面所有内容
-			// 不想删除文佳夹隐藏下面
+			// 不想删除文件夹隐藏下面
 			// String filePath = folderPath;
 			// filePath = filePath.toString();
 			// java.io.File myFilePath = new java.io.File(filePath);
