@@ -8,9 +8,7 @@
 		<artifactId>business1</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<groupId>com.jingling</groupId>
 	<artifactId>business-test</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 	<name>business-test Maven Webapp</name>
 	<url>http://maven.apache.org</url>
