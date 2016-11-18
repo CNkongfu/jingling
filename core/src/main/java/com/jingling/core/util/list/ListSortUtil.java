@@ -1,4 +1,4 @@
-package com.jingling.core.util;
+package com.jingling.core.util.list;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
