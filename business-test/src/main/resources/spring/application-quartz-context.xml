@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd" default-lazy-init="false">
+	<!-- 要调用的工作类 -->
+	<bean id="abstractJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean" abstract="true">
+		<property name="concurrent" value="false" />
+		<property name="targetMethod" value="handle" />
+	</bean>
+	
+	<!-- 定义调用对象和调用对象的方法 -->
+	<bean id="abstractCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean" abstract="true" />
+	<bean id="returnInvestTrigger" parent="abstractCronTrigger">
+		<property name="jobDetail">
+			<bean parent="abstractJobDetail">
+				<property name="targetObject" ref="overdueScheduleHandler" /><!-- 调用类中的方法 -->
+			</bean>
+		</property>
+		<property name="cronExpression" value="0 0/2 * * * ?" /><!-- 定义触发时间，每两分钟执行一次 -->
+	</bean>
+	
+	<!-- 总管理类 （如果将属性 lazy-init='false' 那么容器启动就会执行调度程序） -->
+	<bean id="scheduler"  class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+				<ref bean="returnInvestTrigger"/>
+			</list>
+		</property>
+	</bean> 
+</beans>

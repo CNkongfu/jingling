@@ -11,7 +11,7 @@ public class BaseHandlerImpl<T> extends SqlSessionDaoSupport implements BaseHand
     @PostConstruct
     public void initData() {
         // 根据反射得到泛型的实现类
-        this.saveMethod = "com.deecent.dao.channel.mapper.ChannelDetailMapper" + ".insertSelective";
+        this.saveMethod = "com.kongfu.dao.channel.mapper.ChannelDetailMapper" + ".insertSelective";
     }
 
     @Override
