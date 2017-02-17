@@ -23,6 +23,7 @@
 		<module>dao</module>
 		<module>api</module>
 		<module>plugin</module>
+		<module>business-activity</module>
 	</modules>
 
 	<dependencies>
